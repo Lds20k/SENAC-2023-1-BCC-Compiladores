@@ -11,5 +11,6 @@ typedef struct node_s
 } node_t;
 
 node_t* create_node();
+void destroy_node(node_t*);
 
 #endif
