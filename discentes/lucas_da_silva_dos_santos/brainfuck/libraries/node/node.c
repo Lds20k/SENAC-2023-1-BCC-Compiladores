@@ -4,7 +4,7 @@
 
 #define NODE_T_SIZE sizeof(node_t)
 
-node_t* create_node(){
+node_t* create_node(void){
     node_t* new_node = (node_t*) malloc(NODE_T_SIZE);
     if (new_node == NULL) return NULL;
     memset(new_node, 0, NODE_T_SIZE);
@@ -15,7 +15,6 @@ node_t* create_node(){
 void destroy_node(node_t* node){
     free(node->data_type);
     free(node->data);
-    free(node->edges);
     node->edges_size = 0;
     free(node);
 }

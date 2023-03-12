@@ -6,11 +6,11 @@ typedef struct node_s
 {
     char* data_type;
     void* data;
-    uint32_t edges_size;
+    uint64_t edges_size;
     node_t* edges;
 } node_t;
 
-node_t* create_node();
+node_t* create_node(void);
 void destroy_node(node_t*);
 
 #endif
