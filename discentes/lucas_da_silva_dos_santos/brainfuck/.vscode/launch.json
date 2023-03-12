@@ -8,6 +8,9 @@
             "program": "${workspaceFolder}/bin/brainfuck",
             "stopAtEntry": false,
             "cwd": "${workspaceFolder}",
+            "args": [
+                "example.bf"
+            ],
             "launchCompleteCommand": "exec-run",
             "linux": {
                 "MIMode": "gdb",
