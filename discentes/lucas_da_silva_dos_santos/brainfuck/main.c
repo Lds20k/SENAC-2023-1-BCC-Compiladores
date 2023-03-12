@@ -3,12 +3,12 @@
 #include <errno.h>
 #include <string.h>
 
-#define FILE_NOT_FOUND "file not found!"
+#define FILE_ARGUMENT_MANDATORY "File argument is mandatory!"
 
 int main(int argc, char const *argv[])
 {
     if(argc < 2){
-        fprintf(stderr, "[arguments error] %s\n", FILE_NOT_FOUND);
+        fprintf(stderr, "[arguments error] %s\n", FILE_ARGUMENT_MANDATORY);
         return 1;
     }
 
