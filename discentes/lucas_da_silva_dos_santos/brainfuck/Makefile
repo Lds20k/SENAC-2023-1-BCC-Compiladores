@@ -11,7 +11,7 @@ run: release bin/example.bf
 release: bin/brainfuck
 
 debug: FLAGS += -g -O0
-debug: bin/brainfuck
+debug: bin/brainfuck bin/example.bf
 
 bin/brainfuck: bin/main.o bin/stack.o bin/node.o
 	gcc $(STD) -o bin/brainfuck bin/main.o bin/stack.o bin/node.o $(FLAGS)

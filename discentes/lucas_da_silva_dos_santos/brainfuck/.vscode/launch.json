@@ -9,7 +9,7 @@
             "stopAtEntry": false,
             "cwd": "${workspaceFolder}",
             "args": [
-                "example.bf"
+                "bin/example.bf"
             ],
             "launchCompleteCommand": "exec-run",
             "linux": {
