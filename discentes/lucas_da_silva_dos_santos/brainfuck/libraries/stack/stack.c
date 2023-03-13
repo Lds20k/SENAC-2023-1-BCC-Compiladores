@@ -23,14 +23,14 @@ bool add_to_stack(stack_t* stack, const char* data_type, size_t data_size, void*
     node->data_size = data_size;
     
     node->data_type = malloc(strlen(data_type));
-    if(data_type == NULL){
+    if(node->data_type == NULL){
         destroy_node(node);
         return false;
     }
     strcpy(node->data_type, data_type);
     
     node->data = malloc(data_size);
-    if(data_type == NULL){
+    if(node->data == NULL){
         destroy_node(node);
         return false;
     }
@@ -76,14 +76,6 @@ data_t pop_from_stack(stack_t* stack){
     destroy_node(node);
 
     return item;
-}
-
-void destroy_data(data_t* item){
-    if(item->data != NULL) free(item->data);
-    if(item->data_type != NULL) free(item->data_type);
-
-    item->data = NULL;
-    item->data_type = NULL;
 }
 
 bool stack_is_empty(stack_t* stack){

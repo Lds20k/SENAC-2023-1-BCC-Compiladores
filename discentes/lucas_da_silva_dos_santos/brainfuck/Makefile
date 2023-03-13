@@ -13,8 +13,8 @@ release: bin/brainfuck
 debug: FLAGS += -g -O0
 debug: bin/brainfuck bin/example.bf
 
-bin/brainfuck: bin/main.o bin/stack.o bin/node.o
-	gcc $(STD) -o bin/brainfuck bin/main.o bin/stack.o bin/node.o $(FLAGS)
+bin/brainfuck: bin/main.o bin/stack.o bin/list.o bin/node.o bin/data.o
+	gcc $(STD) -o bin/brainfuck bin/main.o bin/stack.o bin/list.o bin/node.o bin/data.o $(FLAGS)
 
 bin/main.o: main.c bin
 	gcc $(STD) -o bin/main.o main.c -c $(FLAGS)
@@ -22,8 +22,14 @@ bin/main.o: main.c bin
 bin/stack.o: libraries/stack/stack.c bin
 	gcc $(STD) -o bin/stack.o libraries/stack/stack.c -c $(FLAGS)
 
+bin/list.o: libraries/list/list.c bin
+	gcc $(STD) -o bin/list.o libraries/list/list.c -c $(FLAGS)
+
 bin/node.o: libraries/node/node.c bin
 	gcc $(STD) -o bin/node.o libraries/node/node.c -c $(FLAGS)
+
+bin/data.o: libraries/data.c bin
+	gcc $(STD) -o bin/data.o libraries/data.c -c $(FLAGS)
 
 bin/example.bf: bin
 	cp example.bf bin/example.bf

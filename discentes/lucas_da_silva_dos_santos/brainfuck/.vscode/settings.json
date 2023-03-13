@@ -12,6 +12,10 @@
         "tuple": "c",
         "type_traits": "c",
         "utility": "c",
-        "string_view": "c"
+        "string_view": "c",
+        "list.h": "c",
+        "list": "c",
+        "algorithm": "c",
+        "stdbool.h": "c"
     }
 }

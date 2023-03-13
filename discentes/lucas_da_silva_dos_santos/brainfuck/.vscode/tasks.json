@@ -26,9 +26,9 @@
                 "--show-leak-kinds=all",
                 "--track-origins=yes",
                 "--verbose",
-                "${workspaceFolder}/bin/fdisk-bcc",
-                "-l",
-                "${workspaceFolder}/bin/mbr.bin"
+                "--log-file=${workspaceFolder}/bin/valgrind.txt",
+                "${workspaceFolder}/bin/brainfuck",
+                "${workspaceFolder}/bin/example.bf"
             ]
         }
     ]
