@@ -11,22 +11,24 @@
 
 bool is_loop(const char character, stack_t* verify_loop){
     if(character == '['){
-        add_to_stack(verify_loop, "char", "loop");
+        add_to_stack(verify_loop, "string", sizeof(char) * 5, "loop");
         return true;
     }
 
-    data_t* item = pop_from_stack(verify_loop);
-    return item != NULL;
+    data_t item = pop_from_stack(verify_loop);
+    destroy_data(&item);    
+    return item.status;
 }
 
-inline bool is_bracket(const char character){
+extern inline bool is_bracket(const char character){
     return character == '[' || character == ']';
 }
 
-inline bool is_valid_character(const char character){
+extern inline bool is_valid_character(const char character){
     // Valid character
-    // + , - . [ ]
-    return character > 42 && character < 47 || is_bracket(character);
+    // 43| 44| 45| 46 | brackets
+    // + | , | - |  . | [      ]
+    return (character > 42 && character < 47) || is_bracket(character);
 }
 
 char* validate_syntax(FILE* file_pointer){
@@ -42,9 +44,12 @@ char* validate_syntax(FILE* file_pointer){
         }
     }
     
-    if (stack_is_empty(verify_loop))
+    if (!stack_is_empty(verify_loop)){
+        destroy_stack(verify_loop);
         return BRACKET_LEFT_BEHIND;
-    
+    }
+
+    destroy_stack(verify_loop);
     return NULL;
 }
 

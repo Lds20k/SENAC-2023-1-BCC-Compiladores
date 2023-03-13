@@ -2,6 +2,16 @@
     "files.associations": {
         "node.h": "c",
         "string.h": "c",
-        "stack.h": "c"
+        "stack.h": "c",
+        "stdlib.h": "c",
+        "array": "c",
+        "compare": "c",
+        "functional": "c",
+        "ostream": "c",
+        "ranges": "c",
+        "tuple": "c",
+        "type_traits": "c",
+        "utility": "c",
+        "string_view": "c"
     }
 }

@@ -13,8 +13,9 @@ node_t* create_node(void){
 }
 
 void destroy_node(node_t* node){
-    free(node->data_type);
-    free(node->data);
+    if (node->data_type != NULL) free(node->data_type);
+    if (node->data != NULL) free(node->data);
+    
     node->edges_size = 0;
     free(node);
 }
