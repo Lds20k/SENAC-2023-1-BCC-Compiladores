@@ -4,38 +4,41 @@
 
 STD=-std=c11
 FLAGS= -W -Wall -pedantic
+SRC=src
+LIB=$(SRC)/libraries
+BIN=bin
 
-run: release bin/example.bf
-	./bin/brainfuck example.bf
+run: release $(BIN)/example.bf
+	./$(BIN)/brainfuck example.bf
 
-release: bin/brainfuck
+release: $(BIN)/brainfuck
 
 debug: FLAGS += -g -O0
-debug: bin/brainfuck bin/example.bf
+debug: $(BIN)/brainfuck $(BIN)/example.bf
 
-bin/brainfuck: bin/main.o bin/stack.o bin/list.o bin/node.o bin/data.o
-	gcc $(STD) -o bin/brainfuck bin/main.o bin/stack.o bin/list.o bin/node.o bin/data.o $(FLAGS)
+$(BIN)/brainfuck: $(BIN)/main.o $(BIN)/stack.o $(BIN)/list.o $(BIN)/node.o $(BIN)/data.o
+	gcc $(STD) -o $(BIN)/brainfuck $(BIN)/main.o $(BIN)/stack.o $(BIN)/list.o $(BIN)/node.o $(BIN)/data.o $(FLAGS)
 
-bin/main.o: main.c bin
-	gcc $(STD) -o bin/main.o main.c -c $(FLAGS)
+$(BIN)/main.o: $(SRC)/main.c $(BIN)
+	gcc $(STD) -o $(BIN)/main.o $(SRC)/main.c -c $(FLAGS)
 
-bin/stack.o: libraries/stack/stack.c bin
-	gcc $(STD) -o bin/stack.o libraries/stack/stack.c -c $(FLAGS)
+$(BIN)/stack.o: $(LIB)/stack/stack.c $(BIN)
+	gcc $(STD) -o $(BIN)/stack.o $(LIB)/stack/stack.c -c $(FLAGS)
 
-bin/list.o: libraries/list/list.c bin
-	gcc $(STD) -o bin/list.o libraries/list/list.c -c $(FLAGS)
+$(BIN)/list.o: $(LIB)/list/list.c $(BIN)
+	gcc $(STD) -o $(BIN)/list.o $(LIB)/list/list.c -c $(FLAGS)
 
-bin/node.o: libraries/node/node.c bin
-	gcc $(STD) -o bin/node.o libraries/node/node.c -c $(FLAGS)
+$(BIN)/node.o: $(LIB)/node/node.c $(BIN)
+	gcc $(STD) -o $(BIN)/node.o $(LIB)/node/node.c -c $(FLAGS)
 
-bin/data.o: libraries/data.c bin
-	gcc $(STD) -o bin/data.o libraries/data.c -c $(FLAGS)
+$(BIN)/data.o: $(LIB)/data.c $(BIN)
+	gcc $(STD) -o $(BIN)/data.o $(LIB)/data.c -c $(FLAGS)
 
-bin/example.bf: bin
-	cp example.bf bin/example.bf
+$(BIN)/example.bf: $(BIN)
+	cp example.bf $(BIN)/example.bf
 
-bin:
-	mkdir bin
+$(BIN):
+	mkdir $(BIN)
 
 clean:
-	rm -rf bin
+	rm -rf $(BIN)
