@@ -26,8 +26,9 @@ bool is_loop(const char character, stack_t* verify_loop){
     }
 
     data_t item = pop_from_stack(verify_loop);
-    destroy_data(&item);    
-    return item.status;
+    bool status = item.status;
+    destroy_data(&item, true);
+    return status;
 }
 
 extern inline bool is_bracket(const char character){
@@ -131,12 +132,13 @@ char* execute(FILE* file_pointer){
                 break;
             }
             case ']': {
-                data_t loop_item = pop_from_stack(stack);
-                loop_t* loop_end = (loop_t*)loop_item.data;
+                data_t item = pop_from_stack(stack);
+                loop_t* loop_end = (loop_t*)item.data;
                 if(*loop_end->cell > 0){
                     add_to_stack(stack, "loop_t", sizeof(loop_t), loop_end);
                     fseek(file_pointer, loop_end->position, SEEK_SET);
                 }
+                destroy_data(&item, true);
                 break;
             }
         }
@@ -144,7 +146,7 @@ char* execute(FILE* file_pointer){
 
     destroy_list(memory);
     destroy_stack(stack);
-    destroy_data(&item);
+    destroy_data(&item, false);
     return NULL;
 }
 

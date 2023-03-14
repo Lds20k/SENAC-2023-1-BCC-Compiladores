@@ -9,6 +9,6 @@ typedef struct data_s{
     void* data;
 } data_t;
 
-void destroy_data(data_t*);
+void destroy_data(data_t*, bool);
 
 #endif

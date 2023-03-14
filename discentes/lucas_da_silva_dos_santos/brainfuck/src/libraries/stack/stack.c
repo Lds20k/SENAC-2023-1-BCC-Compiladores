@@ -22,7 +22,7 @@ bool add_to_stack(stack_t* stack, const char* data_type, size_t data_size, void*
 
     node->data_size = data_size;
     
-    node->data_type = malloc(strlen(data_type));
+    node->data_type = malloc(strlen(data_type) + 1);
     if(node->data_type == NULL){
         destroy_node(node);
         return false;
@@ -63,7 +63,7 @@ data_t pop_from_stack(stack_t* stack){
     }
     memcpy(item.data, node->data, node->data_size);
 
-    item.data_type = malloc(strlen(node->data_type));
+    item.data_type = malloc(strlen(node->data_type) + 1);
     if(item.data_type == NULL){
         destroy_node(node);
         free(item.data);

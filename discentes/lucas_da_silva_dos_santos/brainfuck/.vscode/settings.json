@@ -16,6 +16,7 @@
         "list.h": "c",
         "list": "c",
         "algorithm": "c",
-        "stdbool.h": "c"
+        "stdbool.h": "c",
+        "string": "c"
     }
 }

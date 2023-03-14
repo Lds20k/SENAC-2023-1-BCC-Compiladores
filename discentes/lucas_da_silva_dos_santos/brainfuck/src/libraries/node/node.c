@@ -23,7 +23,7 @@ void destroy_node(node_t* node){
         node->data = NULL;
     };
     
+    node->data_size = 0;
     node->edges_size = 0;
     free(node);
-    node = NULL;
 }

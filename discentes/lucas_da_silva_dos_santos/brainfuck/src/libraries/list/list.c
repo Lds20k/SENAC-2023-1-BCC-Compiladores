@@ -46,7 +46,7 @@ bool add_to_list(list_t* list, const char* data_type, size_t data_size, void* da
 
     new_node->data_size = data_size;
 
-    new_node->data_type = malloc(strlen(data_type));
+    new_node->data_type = malloc(strlen(data_type) + 1);
     if(new_node->data_type == NULL){
         destroy_node(new_node);
         return false;
@@ -73,11 +73,19 @@ bool add_to_list(list_t* list, const char* data_type, size_t data_size, void* da
 }
 
 void destroy_list(list_t* list){
-    if (list->start != NULL){
-        node_t* node = list->start;
-        list->start = (node->edges_size > 0) ? &(node->edges[0]) : NULL;
+    if(list->start == NULL){
+        list->count = 0;
+        list->end = NULL;
+        list->start = NULL;
+        free(list);
+        return;
+    }
 
-        destroy_node(node);
-        destroy_list(list);
-    } else free(list);
+    node_t* node = list->start;
+    list->start = (node->edges_size > 0) ? &(node->edges[0]) : NULL;
+
+    destroy_node(node);
+    node = NULL;
+    
+    destroy_list(list);
 }
