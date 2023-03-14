@@ -3,6 +3,7 @@
 #include <errno.h>
 #include <string.h>
 #include <stdbool.h>
+#include <unistd.h>
 #include "libraries/data.h"
 #include "libraries/stack/stack.h"
 #include "libraries/list/list.h"
@@ -134,7 +135,7 @@ char* execute(FILE* file_pointer){
             case ']': {
                 data_t item = pop_from_stack(stack);
                 loop_t* loop_end = (loop_t*)item.data;
-                if(*loop_end->cell > 0){
+                if(*loop_end->cell > 0 || *loop_end->cell < 0){
                     add_to_stack(stack, "loop_t", sizeof(loop_t), loop_end);
                     fseek(file_pointer, loop_end->position, SEEK_SET);
                 }
